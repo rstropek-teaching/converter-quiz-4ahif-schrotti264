@@ -3,7 +3,7 @@ function argumentErrorExit()
     console.log('Invalid parameters');
 }
 const UNITS = 'mg';
-const PREFIXES = 'mcd���k'; // position of prefix in string minus 3 = tens potency  of prefix | the character � is just a placeholder
+const PREFIXES = 'mcd   k'; // position of prefix in string minus 3 = tens potency  of prefix | the whitespace characters are just placeholders
 /*
 if query below is true, if following things are fullfilled:
     - right number of arguments
@@ -25,7 +25,7 @@ if( process.argv.length === 6
 )
 &&  process.argv[5].endsWith(process.argv[3].substr(-1))
 ){
-    console.log(`${process.argv[2]} ${process.argv[3]} are ${process.argv[2] * (10**(PREFIXES.indexOf(('�'+ process.argv[3]).substr(-2,1))-3)/10**(PREFIXES.indexOf(('�'+ process.argv[5]).substr(-2,1))-3))} ${process.argv[5].replace('�','')}`);
+    console.log(`${process.argv[2]} ${process.argv[3]} are ${process.argv[2] * (10**(PREFIXES.indexOf((' '+ process.argv[3]).substr(-2,1))-3)/10**(PREFIXES.indexOf((' '+ process.argv[5]).substr(-2,1))-3))} ${process.argv[5].replace('�','')}`);
     /*
     the above console.log call logs following things:
         - source number
@@ -34,13 +34,12 @@ if( process.argv.length === 6
         - the result number
             - it takes the source number and multiplies it with (10 to the power of the position of the source prefix in the PREFIXES string minus 3) divided by (10 to the power of the result prefix in the PREFIXES string mins 3)
             - example: for '5 km to mm' it calculates 5 * 10**3 / 10**-3
-            - � = (some character the user will definitely not use as an argument)
-            - I add a � in front of the unit as a backup prefix if the unit has no prefix.
-              After that I get the second last character in the string via substr(-2,1) which will either be the prefix or the � character.
+            - I add a whitespace in front of the unit as a backup prefix if the unit has no prefix.
+              After that I get the second last character in the string via substr(-2,1) which will either be the prefix or the whitespace character.
               Either way indexOf(2nd last caracter) will return the tens potence* I have to work with.
                 * it's the tens potence plus 3
-                - example: indexOf('�') is 3; indexOf('m') is 0; indexOf('k') is 6
-                - indexOf('�') returns 3 (and not 4 or 5) because it returns the 1st occurrence of the character
+                - example: indexOf(' ') is 3; indexOf('m') is 0; indexOf('k') is 6
+                - indexOf(' ') returns 3 (and not 4 or 5) because it returns the 1st occurrence of the character
     */
 } else{
     argumentErrorExit();
