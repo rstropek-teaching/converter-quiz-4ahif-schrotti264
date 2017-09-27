@@ -3,10 +3,13 @@ function argumentErrorExit()
     console.log('Invalid parameters');
 }
 const UNITS = 'mg';
+// Something went wrong with your checkin. The `?` chars are strange. However, the code still works.
 const PREFIXES = 'mcd���k';
 if( process.argv.length === 6
 &&  !!parseFloat(process.argv[2])
 &&  process.argv[4] === 'to'
+// Why do you check for `process.argv[4]` and `process.argv` in the next lines?
+// These checks must evaluate to true, don't they?
 &&  ((process.argv[3].length === 2 && process.argv[3].substr(0,1).match(`[${PREFIXES}]`) && process.argv[4])
     ||  (process.argv[3].length === 1 && process.argv[3].match(`[${UNITS}]`))
     )
